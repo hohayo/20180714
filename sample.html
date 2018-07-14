@@ -30,7 +30,8 @@
         </style>
     </head>
     <body>
-        <div>   
+        <div>
+            <p>今天的日期是：<span id="date"></span></p>   
             <img src="https://picsum.photos/500/300/?random" />  
             <h1>測試你有沒中獎</h1>
             請輸入你的姓名:<input id="name"></input>
@@ -43,7 +44,9 @@
             <div id="lottery"></div>
         </div>
       <!--最好放在body底下最保險的-->
-      <script> 
+      <script>
+        document.getElementById('date').innerHTML = new Date()
+
         function clickButton() {
             let name = document.getElementById('name').value
             
