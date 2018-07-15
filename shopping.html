@@ -13,12 +13,14 @@
     <body>
         <div id="product"></div>
         已購買商品：<p id="alreadyBuy"></p>
+        <button onclick="pay()">結帳</button>
+        <div id="resultCheck"></div>
 
         <script src="product.js"></script>
         <script>
             let htmlfile = ''
             product.forEach((pro, index) => {
-                htmlfile = htmlfile + '<div id="detail"><img src="' + pro.imgurl + '" /><h3>' + pro.name + '</h3><p>' + pro.type + '</p><button onclick="buy(' + index + ')">加入購物車</button></div>' //字串變數連結
+                htmlfile = htmlfile + '<div id="detail"><img src="' + pro.imgurl + '" /><h3>' + pro.name + '</h3><p>' + pro.type + '</p><p>價格:$' + pro.price + '</p><button onclick="buy(' + index + ')">加入購物車</button></div>' //字串變數連結
                 // htmlfile = '<div id="detail"><h3>肥皂</h3><p>生活用品</p></div><div id="detail"><h3>卡納赫拉娃娃</h3><p>娃娃</p></div><div id="detail"><h3>床單</h3><p>生活用品</p></div>...'
                 // console.log(htmlfile)
             });
@@ -38,7 +40,23 @@
                     //肥皂/床單/....  
                 });
                 //將buyProductWord這個字串放置到alreadyBuy這個dom
-                document.getElementById('alreadyBuy').innerHTML = buyProductWord
+                document.getElementById('alreadyBuy').innerHTML = buyProductWord //product[index].name
+            }
+
+            function pay() {
+                let paymoney = 0
+                buyProduct.forEach((proObj)=>{
+                    paymoney = paymoney + proObj.price
+                })
+                console.log(paymoney)
+                document.getElementById('resultCheck').innerHTML = '<p>總價:' + paymoney + '</p><button onclick="overpay()">確認結帳</button>'
+            }
+
+            function overpay() {
+                alert('購買成功')
+                buyProduct = [] //購買結束要清空
+                document.getElementById('alreadyBuy').innerHTML = ''
+                document.getElementById('resultCheck').innerHTML = ''
             }
         </script>
     </body>
