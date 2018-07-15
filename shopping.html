@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <style>
+        #detail {
+            display: inline-block;  /*浮動區塊*/
+            width: 200px;
+        }
+        img {
+            width: 150px;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="product"></div>
+        已購買商品：<p id="alreadyBuy"></p>
+
+        <script src="product.js"></script>
+        <script>
+            let htmlfile = ''
+            product.forEach((pro, index) => {
+                htmlfile = htmlfile + '<div id="detail"><img src="' + pro.imgurl + '" /><h3>' + pro.name + '</h3><p>' + pro.type + '</p><button onclick="buy(' + index + ')">加入購物車</button></div>' //字串變數連結
+                // htmlfile = '<div id="detail"><h3>肥皂</h3><p>生活用品</p></div><div id="detail"><h3>卡納赫拉娃娃</h3><p>娃娃</p></div><div id="detail"><h3>床單</h3><p>生活用品</p></div>...'
+                // console.log(htmlfile)
+            });
+            document.getElementById('product').innerHTML = htmlfile
+            let buyProduct = [] //加進購物車的東西
+            
+            function buy(index) {   //買了第?個產品(index為產品索引編號))
+                //設定一個變數放已購買的商品字串
+                let buyProductWord = ''
+                // console.log('buy',product[index])   //印出該產品物件資料
+                //將已購買商品放入buyProduct這個矩陣
+                buyProduct.push(product[index])     //加進購買產品進矩陣(紀錄到底買了什麼)
+                console.log(buyProduct)
+                //把buyProduct這個矩陣的每一個object拿出name，融到buyProductWord這個字串
+                buyProduct.forEach((proObj) => {
+                    buyProductWord = buyProductWord + proObj.name + '/' 
+                    //肥皂/床單/....  
+                });
+                //將buyProductWord這個字串放置到alreadyBuy這個dom
+                document.getElementById('alreadyBuy').innerHTML = buyProductWord
+            }
+        </script>
+    </body>
+</html>
